@@ -11,10 +11,12 @@ public class specialShootAbility : MonoBehaviour
     public float magicExplosionDelay=0.7F;
     public float mana=0;
     public float maxMana=100;
-    public float manaRecoverySpeed=0.2F;
+    public float manaRecoverySpeed=0.02F;
     public float manaCost=20F;
     public bool isKeyDown=false;
     public GameObject tmpShot;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class specialShootAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(manaCost < mana && Input.GetKey(KeyCode.RightControl)==true)
         {
             isKeyDown = true;
@@ -60,5 +63,12 @@ public class specialShootAbility : MonoBehaviour
         }
         
         
+    }
+    public void addMana(float _addedMana)
+    {
+        if (mana < maxMana)
+        {
+            mana = mana + _addedMana;
+        }
     }
 }

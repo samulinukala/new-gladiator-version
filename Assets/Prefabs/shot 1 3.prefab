@@ -211,11 +211,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: 0
-  Speed: 15
+  maxSpeed: 40
   enemiesInRadius: []
-  auraDamage: 15
-  explosionCollider: {fileID: 0}
+  auraDamage: 9999
   lifetime: 90
+  minSpeed: 30
 --- !u!58 &3614929049309755391
 CircleCollider2D:
   m_ObjectHideFlags: 0

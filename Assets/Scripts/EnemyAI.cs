@@ -20,7 +20,8 @@ public class EnemyAI : MonoBehaviour
     private float timer=0;
     private float unstuckTimer=4;
     private bool isTouchingPlayer=false;
-    
+    public float manaForKilling;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +140,16 @@ public class EnemyAI : MonoBehaviour
     public void damageEnemy(float _damage)
     {
         enemyHealth = enemyHealth - _damage;
-        
+        if (enemyHealth < 0)
+        {
+            player.GetComponent<specialShootAbility>().addMana(manaForKilling);
+        }
+
+
+    }
+    public void takeDamageFromAura(float _damage)
+    {
+        enemyHealth = enemyHealth - _damage;
     }
 
 }

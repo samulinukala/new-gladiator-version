@@ -5,15 +5,17 @@ using UnityEngine;
 public class shot : MonoBehaviour
 {
     public int movementDirection;
-    public float Speed=5F;
+    public float maxSpeed=20F;
     public List<GameObject> enemiesInRadius=new List<GameObject>();
     public float auraDamage=5;
     private float lifetimeTimer=0;
     public float lifetime=40;
+    public float minSpeed = 10;
+    private float Speed;
     // Start is called before the first frame update
     void Start()
     {
-        Speed = Random.Range(5F, Speed);
+        Speed = Random.Range(minSpeed, maxSpeed);
        
     }
 
@@ -47,7 +49,8 @@ public class shot : MonoBehaviour
         
         foreach(GameObject e in enemiesInRadius)
         {
-            e.gameObject.GetComponent<EnemyAI>().enemyHealth = e.gameObject.GetComponent<EnemyAI>().enemyHealth - auraDamage * Time.deltaTime;
+            e.gameObject.GetComponent<EnemyAI>().takeDamageFromAura(auraDamage * Time.deltaTime);
+            
 
         }
     }

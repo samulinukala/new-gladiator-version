@@ -19,6 +19,8 @@ public class playerMovement : MonoBehaviour
     public bool canMoveRight = true;
     public int spellKillUnlock=9;
     public specialShootAbility specialShootAbility;
+   
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         GameObject.FindGameObjectWithTag("playerHealthBar").GetComponent<healthBar>().valueRetriver(health, 100);
         if(score>spellKillUnlock)
         {

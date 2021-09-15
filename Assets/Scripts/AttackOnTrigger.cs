@@ -39,7 +39,7 @@ public class AttackOnTrigger : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision != null)
+        if (collision.GetComponent<EnemyAI>() != null)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) && playerMovement.attackReady == true ||
                 Input.GetKeyDown(KeyCode.UpArrow) && playerMovement.attackReady == true ||

@@ -9,8 +9,10 @@ public class Spawner : MonoBehaviour
     public GameObject enemy1;
     public GameObject enemy2;
     public float spawnTimer=10;
-    private float timer; 
+    private float timer=0; 
     private int randomizedSpawn;
+    private float timerQuickeningTimer=0;
+    public float timerQuickeningTarget=12.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,18 @@ public class Spawner : MonoBehaviour
         if (timer < spawnTimer)
         {
             timer=timer + 1 * Time.deltaTime;
+        }
+        if (timerQuickeningTarget > timerQuickeningTimer)
+        {
+            timerQuickeningTimer = timerQuickeningTimer + 1 * Time.deltaTime;
+        }
+        else if(timerQuickeningTarget<timerQuickeningTimer)
+        {
+            timerQuickeningTimer = 0;
+            if (spawnTimer > 0.7f)
+            {
+                spawnTimer = spawnTimer / 2;
+            }
         }
         
         if (timer > spawnTimer)

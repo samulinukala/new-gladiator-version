@@ -50,6 +50,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -151,7 +152,7 @@ MonoBehaviour:
   stopDistance: 0.1
   minEnemyDistance: 0.25
   scoreValue: 1
-  healthBar: {fileID: 0}
+  manaForKilling: 2
 --- !u!58 &2785911662279497625
 CircleCollider2D:
   m_ObjectHideFlags: 0
