@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class attack : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class attack : MonoBehaviour
     private float timer = 0;
     public int attackCollider;
     public GameObject AttackTrigger;
-    
-
+    public SpriteRenderer Sword;
+    public float Swordtimer = 1.3f;
+    public float SwordTimerTarget = 1.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,27 +44,36 @@ public class attack : MonoBehaviour
         {
             attackCollider = 7;
         }
+        if (Swordtimer < SwordTimerTarget)
+        {
+            Sword.enabled = true;
+            Swordtimer = Swordtimer + 1 * Time.deltaTime;
+        }
+        else if(Swordtimer>SwordTimerTarget)
+        {
+            Sword.enabled = false;
+        }
         switch (attackCollider)
         {
             case 3:
 
                 AttackTrigger.transform.eulerAngles = new Vector3(0, 0, -90);
-
+                Swordtimer = 0;
                 break;
             case 2:
 
                 AttackTrigger.transform.eulerAngles = new Vector3(0, 0, -180);
-
+                Swordtimer = 0;
                 break;
             case 1:
 
                 AttackTrigger.transform.eulerAngles = new Vector3(0, 0, 90);
-
+                Swordtimer = 0;
                 break;
             case 0:
 
                 AttackTrigger.transform.eulerAngles = new Vector3(0, 0, 0);
-                
+                Swordtimer = 0;
                 break;
             default:
 
