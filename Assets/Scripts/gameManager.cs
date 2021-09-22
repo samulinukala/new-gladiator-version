@@ -43,13 +43,13 @@ public class gameManager : MonoBehaviour
     }
     public void exitTheGame()
     {
-        Debug.Log("exit");
+      
         Application.Quit();
     }
     public void exitToMenu()
     {
-        Debug.Log("exit to menu");
-       // SceneManager.LoadScene("endMenu");
+        
+        SceneManager.LoadScene(1);
     }
     public void pauseGame()
     {
@@ -90,7 +90,7 @@ public class gameManager : MonoBehaviour
     }
     public void resetTheGame()
     {
-        Debug.Log("scene loaded");
-        //SceneManager.LoadScene("Game");
+  
+        SceneManager.LoadScene(0);
     }
 }
