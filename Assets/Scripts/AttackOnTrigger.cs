@@ -59,6 +59,7 @@ public class AttackOnTrigger : MonoBehaviour
             {
                 enemies.Add(collision.gameObject);
             }
+
            
             GameObject.FindGameObjectWithTag("Player").GetComponent<playerMovement>().attackReady = false;
 

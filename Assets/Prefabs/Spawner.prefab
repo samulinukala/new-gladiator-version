@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy0: {fileID: 936343682009353065, guid: 86400569d70634d46a9be5e0cd8a9460, type: 3}
-  enemy1: {fileID: 936343682009353065, guid: 86400569d70634d46a9be5e0cd8a9460, type: 3}
+  enemy1: {fileID: 5937817697449586586, guid: e9862e19950a7da46b13b84778e0d12c, type: 3}
   enemy2: {fileID: 936343682009353065, guid: 86400569d70634d46a9be5e0cd8a9460, type: 3}
   spawnTimer: 10
+  timerQuickeningTarget: 12.5
+  chanceForEnemy: 25
+  eliteEnemies: []
+  enemies: []
+  enemyLimit: 75

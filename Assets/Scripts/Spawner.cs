@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Spawner : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class Spawner : MonoBehaviour
     private int randomizedSpawn;
     private float timerQuickeningTimer=0;
     public float timerQuickeningTarget=12.5f;
+    public float chanceForEnemy;
+    public List<GameObject> eliteEnemies;
+    public List<GameObject> enemies;
+    public int enemyLimit;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +27,33 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyToSpawn = Random.Range(0F, 2F);
+       foreach(GameObject e in GameObject.FindGameObjectsWithTag("enemy"))
+        {
+            if (enemies.Contains(e) == false)
+            {
+                enemies.Add(e);
+            }
+        }
+       foreach(GameObject e in enemies)
+        {
+            if (e == null)
+            {
+                enemies.Remove(e);
+            }
+        }
+
+        eliteEnemies.Clear();
+        eliteEnemies.AddRange( GameObject.FindGameObjectsWithTag("elite"));
+        for(int i = 0; i < eliteEnemies.Count - 1; i++)
+        {
+            if (eliteEnemies[i] == null)
+            {
+                eliteEnemies.RemoveAt(i);
+            }
+        }
+        enemyToSpawn = 0;
+        
+        if (eliteEnemies.Count<2&(int)Random.Range(0, chanceForEnemy + 1) == chanceForEnemy) { enemyToSpawn = 1; Debug.Log("enemy 2"); }
         randomizedSpawn = (int) enemyToSpawn;
         if (timer < spawnTimer)
         {
@@ -41,7 +72,7 @@ public class Spawner : MonoBehaviour
             }
         }
         
-        if (timer > spawnTimer)
+        if (timer > spawnTimer&enemies.Count<enemyLimit+1)
         {
             
             timer = 0;

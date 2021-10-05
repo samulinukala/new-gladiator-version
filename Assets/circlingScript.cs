@@ -12,6 +12,7 @@ public class circlingScript : MonoBehaviour
     private float angle;
     public float rotationOffset;
     public float changeSpeed;
+    public float damage;
 
     private void Start()
     {
@@ -27,5 +28,12 @@ public class circlingScript : MonoBehaviour
         var offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * changingRadius;
         transform.position = Center + offset;
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<playerMovement>() != null)
+        {
+            collision.gameObject.GetComponent<playerMovement>().damagePlayerSlow(damage);
+        }
     }
 }

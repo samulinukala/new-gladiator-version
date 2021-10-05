@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - pauseMenu
+  - gameManager
+  - endMenu
+  - Shot
+  - enemy
+  - Wall
+  - Spawner
+  - playerManaBar
+  - playerHealthBar
+  - elite
   layers:
   - Default
   - TransparentFX

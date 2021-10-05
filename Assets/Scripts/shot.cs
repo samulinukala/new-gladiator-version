@@ -60,7 +60,7 @@ public class shot : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("enemy"))
+        if (collision.gameObject.GetComponent<EnemyAI>()!=null)
         {
            
             enemiesInRadius.Add(collision.gameObject);
@@ -68,7 +68,7 @@ public class shot : MonoBehaviour
         
     }
     private void OnTriggerExit2D(Collider2D collision)
-    {   if(collision.CompareTag("enemy"))
+    {   if(collision.gameObject.GetComponent<EnemyAI>() != null)
             {
             
             enemiesInRadius.Remove(collision.gameObject);
