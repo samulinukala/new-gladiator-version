@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
@@ -18,6 +19,17 @@ public class Spawner : MonoBehaviour
     public List<GameObject> eliteEnemies;
     public List<GameObject> enemies;
     public int enemyLimit;
+    public float eliteCooldown = 90;
+    public float coolDownTimer = 0;
+    public bool limitSpawning = false;
+    public float BreakTime = 60;
+    public float BreakTimer = 0;
+    public bool BreakIsOn=false;
+    public float playerPreviousKillCount=0;
+    public float playerKillCount=0;
+    public float BreakInterval=200;
+    public Text text;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +39,52 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (BreakIsOn == true)
+        {
+            foreach(GameObject e in enemies)
+            {
+                DestroyImmediate(e);
+            }
+            foreach(GameObject e in eliteEnemies)
+            {
+                DestroyImmediate(e);
+            }
+            text.text = "BREAK " + (((int)(BreakTime - BreakTimer))).ToString();
+        }
+        if (BreakIsOn == false)
+        {
+            text.text = " ";
+        }
+        playerKillCount = GameObject.FindObjectOfType<playerMovement>().score;
+        if (playerKillCount - playerPreviousKillCount > BreakInterval)
+        {
+            BreakIsOn = true;
+            playerPreviousKillCount = playerKillCount;
+        }
+        if (BreakIsOn ==true & BreakTimer < BreakTime)
+        {
+            BreakTimer += 1*Time.deltaTime;
+        }
+        if(BreakIsOn == true & BreakTimer > BreakTime)
+        {
+            BreakIsOn = false;
+            BreakTimer = 0;
+        }
+        if (eliteEnemies.Count > 1 & limitSpawning == false)
+        {
+            limitSpawning = true;
+        }
+
+        if (limitSpawning == true&coolDownTimer<eliteCooldown)
+        {
+            coolDownTimer += 1 * Time.deltaTime;
+        }
+        if (limitSpawning == true & coolDownTimer > eliteCooldown)
+        {
+            coolDownTimer = 0;
+            limitSpawning = false;
+        }
+        
        foreach(GameObject e in GameObject.FindGameObjectsWithTag("enemy"))
         {
             if (enemies.Contains(e) == false)
@@ -41,7 +99,7 @@ public class Spawner : MonoBehaviour
                 enemies.Remove(e);
             }
         }
-
+        
         eliteEnemies.Clear();
         eliteEnemies.AddRange( GameObject.FindGameObjectsWithTag("elite"));
         for(int i = 0; i < eliteEnemies.Count - 1; i++)
@@ -53,7 +111,7 @@ public class Spawner : MonoBehaviour
         }
         enemyToSpawn = 0;
         
-        if (eliteEnemies.Count<2&(int)Random.Range(0, chanceForEnemy + 1) == chanceForEnemy) { enemyToSpawn = 1; Debug.Log("enemy 2"); }
+        if (BreakIsOn==false&limitSpawning==false&(int)Random.Range(0, chanceForEnemy + 1) == chanceForEnemy) { enemyToSpawn = 1; Debug.Log("enemy 2"); }
         randomizedSpawn = (int) enemyToSpawn;
         if (timer < spawnTimer)
         {
@@ -72,7 +130,7 @@ public class Spawner : MonoBehaviour
             }
         }
         
-        if (timer > spawnTimer&enemies.Count<enemyLimit+1)
+        if (timer > spawnTimer&enemies.Count<enemyLimit+1&BreakIsOn==false)
         {
             
             timer = 0;

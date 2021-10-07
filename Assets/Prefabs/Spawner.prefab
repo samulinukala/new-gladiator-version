@@ -52,3 +52,13 @@ MonoBehaviour:
   eliteEnemies: []
   enemies: []
   enemyLimit: 75
+  eliteCooldown: 90
+  coolDownTimer: 0
+  limitSpawning: 0
+  BreakTime: 30
+  BreakTimer: 0
+  BreakIsOn: 0
+  playerPreviousKillCount: 0
+  playerKillCount: 0
+  BreakInterval: 200
+  text: {fileID: 0}

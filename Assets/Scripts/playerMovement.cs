@@ -19,18 +19,35 @@ public class playerMovement : MonoBehaviour
     public bool canMoveRight = true;
     public int spellKillUnlock=9;
     public specialShootAbility specialShootAbility;
+    public movementAnim anim;
+    public float maxHealth = 100f;
+    public float regenRate = 1;
    
     
     // Start is called before the first frame update
     void Start()
     {
         playerLocation = transform.position;
+        anim = gameObject.GetComponent<movementAnim>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (health < maxHealth)
+        {
+            health += regenRate * Time.deltaTime;
+        }
+        if(Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.S))
+        {
+            anim.active = true;
+
+        }
+        else
+        {
+            anim.active = false;
+        }
+
         GameObject.FindGameObjectWithTag("playerHealthBar").GetComponent<healthBar>().valueRetriver(health, 100);
         if(score>spellKillUnlock)
         {
