@@ -35,6 +35,13 @@ public class AttackOnTrigger : MonoBehaviour
 
             }
         }
+        foreach(GameObject i in enemies)
+        {
+            if (i == null)
+            {
+                enemies.Remove(i);
+            }
+        }
 
     }
     private void OnTriggerStay2D(Collider2D collision)
